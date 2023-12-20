@@ -1,4 +1,4 @@
-import NavLink from "./NavLink";
+import NavBarLink from "./NavBarLink";
 import SideNav from "./SideNav";
 
 const Navbar = () => {
@@ -8,7 +8,7 @@ const Navbar = () => {
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
           {/* Navbar */}
-          <NavLink></NavLink>
+          <NavBarLink></NavBarLink>
         </div>
         <div className="drawer-side">
           <label

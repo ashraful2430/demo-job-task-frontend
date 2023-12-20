@@ -1,6 +1,7 @@
+import { NavLink } from "react-router-dom";
 import Container from "../../Shared/Container";
 
-const NavLink = () => {
+const NavBarLink = () => {
   return (
     <>
       <div className="w-full navbar bg-base-200 shadow-xl">
@@ -26,17 +27,27 @@ const NavLink = () => {
               </svg>
             </label>
           </div>
-          <div className="flex-1 px-2 mx-2">Navbar Title</div>
-          <div className="flex-none hidden lg:block">
-            <ul className="menu menu-horizontal">
+          <div className="flex-1 px-2 mx-2">TaskNinja</div>
+          <div className="flex-none hidden lg:block mr-28">
+            <div className="flex items-center gap-4">
               {/* Navbar menu content here */}
-              <li>
-                <a>Navbar Item 1</a>
-              </li>
-              <li>
-                <a>Navbar Item 2</a>
-              </li>
-            </ul>
+              <NavLink
+                to={"/"}
+                className={({ isActive }) =>
+                  isActive ? " bg-none text-blue-500 font-bold" : ""
+                }
+              >
+                Home
+              </NavLink>
+              <NavLink
+                to={"/tasks"}
+                className={({ isActive }) =>
+                  isActive ? " bg-none text-blue-500 font-bold" : ""
+                }
+              >
+                My Tasks
+              </NavLink>
+            </div>
           </div>
         </Container>
       </div>
@@ -44,4 +55,4 @@ const NavLink = () => {
   );
 };
 
-export default NavLink;
+export default NavBarLink;
