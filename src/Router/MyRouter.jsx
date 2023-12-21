@@ -6,6 +6,8 @@ import LogIn from "../Pages/LogIn/LogIn";
 import SignUp from "../Pages/SignUp/SignUp";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import UserProfile from "../Components/UserProfile/UserProfile";
+import AddTask from "../Components/AddTask/AddTask";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +35,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: "profile",
-        element: <UserProfile></UserProfile>,
+        element: (
+          <PrivateRoute>
+            <UserProfile></UserProfile>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "add-task",
+        element: (
+          <PrivateRoute>
+            <AddTask></AddTask>
+          </PrivateRoute>
+        ),
       },
     ],
   },
