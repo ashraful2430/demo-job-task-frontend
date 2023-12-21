@@ -1,5 +1,6 @@
 import Lottie from "lottie-react";
 import bannerImg from "../../assets/banner.json";
+import { Link } from "react-router-dom";
 const Banner = () => {
   return (
     <>
@@ -17,9 +18,11 @@ const Banner = () => {
               Efficiency Meets Intuitive Task Mastery!
             </p>
             <div className="flex justify-center">
-              <button className="inline-flex text-white bg-[#66b888] border-0 py-2 px-6 focus:outline-none hover:bg-[#2f7c4f] rounded text-lg">
-                Lets Explore
-              </button>
+              <Link to={"/login"}>
+                <button className="inline-flex text-white bg-[#66b888] border-0 py-2 px-6 focus:outline-none hover:bg-[#2f7c4f] rounded text-lg">
+                  Lets Explore
+                </button>
+              </Link>
             </div>
           </div>
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
