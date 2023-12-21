@@ -7,7 +7,7 @@ const SideNav = () => {
         <NavLink
           to={"/"}
           className={({ isActive }) =>
-            isActive ? " bg-none text-blue-500 font-bold" : ""
+            isActive ? " bg-none text-[#66b888] font-bold" : ""
           }
         >
           Home
@@ -15,7 +15,7 @@ const SideNav = () => {
         <NavLink
           to={"/tasks"}
           className={({ isActive }) =>
-            isActive ? " bg-none text-blue-500 font-bold" : ""
+            isActive ? " bg-none text-[#66b888] font-bold" : ""
           }
         >
           My Tasks

@@ -6,7 +6,7 @@ const ErrorPage = () => {
   return (
     <div>
       <Lottie
-        className="w-[600px] max-h-screen mx-auto"
+        className=" md:w-[400px] lg:w-[600px] max-h-screen mx-auto"
         animationData={errorAnimation}
       ></Lottie>
       <div className="text-center">

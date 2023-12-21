@@ -1,11 +1,12 @@
 import Container from "../../Shared/Container";
+import Banner from "../Banner/Banner";
 
 const Home = () => {
   return (
     <>
       <Container>
         <div className="lg:ml-4">
-          <h3>This is home</h3>
+          <Banner />
         </div>
       </Container>
     </>
