@@ -1,5 +1,6 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Container from "../../Shared/Container";
+import logo from "../../assets/logo.png";
 
 const NavBarLink = () => {
   return (
@@ -27,7 +28,11 @@ const NavBarLink = () => {
               </svg>
             </label>
           </div>
-          <div className="flex-1 px-2 mx-2">TaskNinja</div>
+          <div className="flex-1 px-2 mx-2">
+            <Link to={"/"}>
+              <img className="h-14" src={logo} alt="" />
+            </Link>
+          </div>
           <div className="flex-none hidden lg:block mr-28">
             <div className="flex items-center gap-4">
               {/* Navbar menu content here */}
