@@ -9,10 +9,12 @@ import { FaEye } from "react-icons/fa";
 import { IoMdEyeOff } from "react-icons/io";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const SignUp = () => {
   const [showPass, setShowPass] = useState();
-  const { registerUser } = useAuth();
+  const { registerUser, handleUpdateProfile } = useAuth();
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const {
     register,
@@ -21,19 +23,38 @@ const SignUp = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    registerUser(data.email, data.password).then((result) => {
-      console.log(result);
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "User Logged in successfully",
-        showConfirmButton: false,
-        timer: 1500,
+    registerUser(data.email, data.password)
+      .then((result) => {
+        console.log(result);
+        handleUpdateProfile(data.name).then(() => {
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+          };
+          axiosPublic.post("/new-users", userInfo).then((res) => {
+            console.log(res.data);
+            if (res.data.insertedId) {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "User registered successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate("/");
+            }
+          });
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire({
+          title: "Sorry!",
+          text: "Something went wrong please try again",
+          icon: "error",
+        });
       });
-      navigate("/");
-    });
   };
-
   return (
     <>
       <div className="flex justify-center items-center min-h-screen">

@@ -1,16 +1,18 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Container from "../../Shared/Container";
 import logo from "../../assets/logo.png";
 import useAuth from "../../Hooks/useAuth";
 
 const NavBarLink = () => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const defaultPhoto =
     "https://i.ibb.co/Fhm4brM/Screenshot-2023-11-25-145934.jpg";
   const handleLogOut = () => {
     logout()
       .then((result) => {
         console.log(result);
+        navigate("/");
       })
       .catch((error) => {
         console.error(error);
@@ -79,9 +81,9 @@ const NavBarLink = () => {
                   </label>
                   <ul
                     tabIndex={0}
-                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-64"
                   >
-                    <li>
+                    <li className="mx-auto">
                       <p className="font-medium">{user.displayName}</p>
                     </li>
                     <li>
@@ -92,7 +94,7 @@ const NavBarLink = () => {
                         Logout
                       </button>
                     </li>
-                    <li>
+                    <li className="mx-auto">
                       <Link>Dashboard</Link>
                     </li>
                   </ul>

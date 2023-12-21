@@ -1,4 +1,35 @@
+import { useNavigate } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+
 const SocialLogin = () => {
+  const { googleSignIn } = useAuth();
+  const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
+  const handleGoogleSignIn = () => {
+    googleSignIn().then((result) => {
+      const userInfo = {
+        email: result.user?.email,
+        name: result.user?.displayName,
+      };
+      axiosPublic.post("/new-users", userInfo).then((res) => {
+        console.log(res.data);
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "User Logged in successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/");
+        }
+      });
+
+      navigate("/");
+    });
+  };
   return (
     <>
       <a className="flex items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg  hover:bg-gray-50 ">
@@ -24,7 +55,7 @@ const SocialLogin = () => {
         </div>
 
         <span className="w-5/6 px-4 py-3 font-bold text-center">
-          Sign in with Google
+          <button onClick={handleGoogleSignIn}>Sign in with Google</button>
         </span>
       </a>
     </>
