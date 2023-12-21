@@ -9,6 +9,7 @@ import UserProfile from "../Components/UserProfile/UserProfile";
 import AddTask from "../Components/AddTask/AddTask";
 import PrivateRoute from "./PrivateRoute";
 import Todo from "../Components/Todo/Todo";
+import MyTask from "../Components/MyTask/MyTask";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/tasks",
+        element: (
+          <PrivateRoute>
+            <MyTask></MyTask>
+          </PrivateRoute>
+        ),
       },
     ],
   },
