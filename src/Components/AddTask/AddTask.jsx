@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 const AddTask = () => {
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
+  const status = "to-do";
   const {
     register,
     handleSubmit,
@@ -23,6 +24,7 @@ const AddTask = () => {
       description: data.description,
       deadLine: data.deadLine,
       priority: data.priority,
+      status,
     };
     const res = await axiosPublic.post("/tasks", info);
     console.log(res);
