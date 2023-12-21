@@ -41,6 +41,14 @@ const DashboardNavLink = () => {
                   Home
                 </NavLink>
                 <NavLink
+                  to={"/dashboard/profile"}
+                  className={({ isActive }) =>
+                    isActive ? " bg-none text-[#66b888] font-bold" : ""
+                  }
+                >
+                  Profile
+                </NavLink>
+                <NavLink
                   to={"/dashboard/add-task"}
                   className={({ isActive }) =>
                     isActive ? " bg-none text-[#66b888] font-bold" : ""

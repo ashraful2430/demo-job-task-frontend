@@ -67,43 +67,38 @@ const NavBarLink = () => {
               >
                 My Tasks
               </NavLink>
-              {user?.email ? (
-                <div className="dropdown dropdown-end z-50 text-center">
-                  <label
-                    tabIndex={0}
-                    className="btn btn-ghost btn-circle avatar"
-                  >
-                    <div className="w-10 rounded-full">
-                      <img
-                        src={user.photoURL ? user?.photoURL : defaultPhoto}
-                      />
-                    </div>
-                  </label>
-                  <ul
-                    tabIndex={0}
-                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-64"
-                  >
-                    <li className="mx-auto">
-                      <p className="font-medium">{user.displayName}</p>
-                    </li>
-                    <li>
-                      <button
-                        onClick={handleLogOut}
-                        className="btn btn-sm  btn-ghost transition hover:scale-110 hover:shadow-xl focus:outline-none"
-                      >
-                        Logout
-                      </button>
-                    </li>
-                    <li className="mx-auto">
-                      <Link to={"/dashboard/profile"}>Dashboard</Link>
-                    </li>
-                  </ul>
-                </div>
-              ) : (
-                <></>
-              )}
             </div>
           </div>
+          {user?.email ? (
+            <div className="dropdown dropdown-end z-50 text-center">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
+                  <img src={user.photoURL ? user?.photoURL : defaultPhoto} />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-64"
+              >
+                <li className="mx-auto">
+                  <p className="font-medium">{user.displayName}</p>
+                </li>
+                <li>
+                  <button
+                    onClick={handleLogOut}
+                    className="btn btn-sm  btn-ghost transition hover:scale-110 hover:shadow-xl focus:outline-none"
+                  >
+                    Logout
+                  </button>
+                </li>
+                <li className="mx-auto">
+                  <Link to={"/dashboard/profile"}>Dashboard</Link>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <></>
+          )}
         </Container>
       </div>
     </>

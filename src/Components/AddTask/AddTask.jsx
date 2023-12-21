@@ -1,12 +1,46 @@
 import Lottie from "lottie-react";
 import Container from "../../Shared/Container";
 import addAnimation from "../../assets/task-add.json";
+import { useForm } from "react-hook-form";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const AddTask = () => {
+  const { user } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = async (data) => {
+    const info = {
+      email: user.email,
+      title: data.title,
+      description: data.description,
+      deadLine: data.deadLine,
+      priority: data.priority,
+    };
+    const res = await axiosPublic.post("/tasks", info);
+    console.log(res);
+    if (res.data.insertedId) {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your task has been added successfully",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      reset();
+    }
+  };
   return (
     <>
       <Container>
-        <section className=" bg-white mt-10  md:max-w-screen-xl mx-auto">
+        <section className=" bg-white mt-10  md:max-w-screen-xl mx-auto -z-10">
           <div className="mb-10">
             <h1 className="text-center text-4xl font-medium">Add your Tasks</h1>
           </div>
@@ -20,10 +54,13 @@ const AddTask = () => {
 
             <main className=" px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
               <div className="max-w-xl lg:max-w-3xl">
-                <form className="mt-8 grid grid-cols-6 gap-6  w-full">
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="mt-8 grid grid-cols-6 gap-6  w-full"
+                >
                   <div className="col-span-6 sm:col-span-3 w-full ">
                     <label
-                      htmlFor="FirstName"
+                      htmlFor=""
                       className="block text-sm font-medium text-gray-700"
                     >
                       Title
@@ -31,10 +68,14 @@ const AddTask = () => {
 
                     <input
                       type="text"
-                      id="FirstName"
-                      name="product_name"
+                      id=""
+                      name=""
+                      {...register("title", { required: true })}
                       className="mt-1 w-full p-3 border rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                     />
+                    {errors.title && (
+                      <span className="text-red-500">Title is required</span>
+                    )}
                   </div>
 
                   <div className="col-span-6 sm:col-span-3">
@@ -46,9 +87,11 @@ const AddTask = () => {
                     </label>
                     <label className="input-group">
                       <select
-                        name="brand_name"
                         className="select select-bordered w-full"
                         required
+                        value={watch("priority") || ""}
+                        name="priority"
+                        {...register("priority", { required: true })}
                       >
                         <option value="" disabled selected>
                           Select Priority
@@ -67,9 +110,15 @@ const AddTask = () => {
 
                     <input
                       type="date"
-                      name="photo"
+                      name=""
                       className="mt-1 w-full p-3 border  rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                      {...register("deadLine", { required: true })}
                     />
+                    {errors.deadLine && (
+                      <span className="text-red-500">
+                        Please Pick Your Dead Line
+                      </span>
+                    )}
                   </div>
                   <div className="col-span-6">
                     <label className="block text-sm font-medium text-gray-700">
@@ -78,9 +127,15 @@ const AddTask = () => {
 
                     <textarea
                       type="text"
-                      name="photo"
+                      name=""
                       className="mt-1 w-full p-3 border  rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                      {...register("description", { required: true })}
                     />
+                    {errors.description && (
+                      <span className="text-red-500">
+                        Description is needed
+                      </span>
+                    )}
                   </div>
 
                   <div className="col-span-6 sm:flex sm:items-center sm:gap-4  border">
