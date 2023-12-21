@@ -1,7 +1,10 @@
 import PropTypes from "prop-types";
 
 const CompletedDetails = ({ item }) => {
-  const { title, description, status, deadLine, priority } = item;
+  const { title, description, status, deadLine, priority, _id } = item;
+  const handleDelete = (id) => {
+    console.log(id);
+  };
   return (
     <div>
       <div className="card w-96 bg-base-100 shadow-xl my-3">
@@ -12,6 +15,14 @@ const CompletedDetails = ({ item }) => {
 
           <p>Priority:{priority}</p>
           <p>Dead Line: {deadLine}</p>
+          <div>
+            <button
+              onClick={() => handleDelete(_id)}
+              className="btn btn-block bg-green-500 text-white"
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ import useComplete from "../../Hooks/useComplete";
 import CompletedDetails from "./CompletedDetails";
 
 const Todo = () => {
-  const [toDo, isLoading] = useLoadTodo();
+  const [toDo, isLoading, refetch] = useLoadTodo();
   const [ongoing] = useOngoing();
   const [completed] = useComplete();
   if (isLoading) {
@@ -30,7 +30,11 @@ const Todo = () => {
               </h3>
               <div>
                 {toDo.map((item) => (
-                  <TodoDetails key={item._id} item={item}></TodoDetails>
+                  <TodoDetails
+                    key={item._id}
+                    item={item}
+                    refetch={refetch}
+                  ></TodoDetails>
                 ))}
               </div>
             </div>
@@ -40,7 +44,11 @@ const Todo = () => {
               </h3>
               <div>
                 {ongoing.map((item) => (
-                  <OngoingDetails key={item._id} item={item}></OngoingDetails>
+                  <OngoingDetails
+                    key={item._id}
+                    item={item}
+                    refetch={refetch}
+                  ></OngoingDetails>
                 ))}
               </div>
             </div>
@@ -49,7 +57,11 @@ const Todo = () => {
                 Completed
               </h3>
               {completed.map((item) => (
-                <CompletedDetails key={item._id} item={item}></CompletedDetails>
+                <CompletedDetails
+                  key={item._id}
+                  refetch={refetch}
+                  item={item}
+                ></CompletedDetails>
               ))}
             </div>
           </div>
