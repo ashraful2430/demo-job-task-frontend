@@ -1,8 +1,21 @@
 import { Link, NavLink } from "react-router-dom";
 import Container from "../../Shared/Container";
 import logo from "../../assets/logo.png";
+import useAuth from "../../Hooks/useAuth";
 
 const NavBarLink = () => {
+  const { user, logout } = useAuth();
+  const defaultPhoto =
+    "https://i.ibb.co/Fhm4brM/Screenshot-2023-11-25-145934.jpg";
+  const handleLogOut = () => {
+    logout()
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   return (
     <>
       <div className="w-full navbar bg-base-200 shadow-xl">
@@ -52,6 +65,41 @@ const NavBarLink = () => {
               >
                 My Tasks
               </NavLink>
+              {user?.email ? (
+                <div className="dropdown dropdown-end z-50 text-center">
+                  <label
+                    tabIndex={0}
+                    className="btn btn-ghost btn-circle avatar"
+                  >
+                    <div className="w-10 rounded-full">
+                      <img
+                        src={user.photoURL ? user?.photoURL : defaultPhoto}
+                      />
+                    </div>
+                  </label>
+                  <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                  >
+                    <li>
+                      <p className="font-medium">{user.displayName}</p>
+                    </li>
+                    <li>
+                      <button
+                        onClick={handleLogOut}
+                        className="btn btn-sm  btn-ghost transition hover:scale-110 hover:shadow-xl focus:outline-none"
+                      >
+                        Logout
+                      </button>
+                    </li>
+                    <li>
+                      <Link>Dashboard</Link>
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </Container>
