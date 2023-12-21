@@ -1,10 +1,39 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 import Lottie from "lottie-react";
 import signUpImg from "../../assets/signUp.json";
 import logoImg from "../../assets/logo.png";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { FaEye } from "react-icons/fa";
+import { IoMdEyeOff } from "react-icons/io";
+import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
+  const [showPass, setShowPass] = useState();
+  const { registerUser } = useAuth();
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    registerUser(data.email, data.password).then((result) => {
+      console.log(result);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "User Logged in successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate("/");
+    });
+  };
+
   return (
     <>
       <div className="flex justify-center items-center min-h-screen">
@@ -33,7 +62,7 @@ const SignUp = () => {
 
               <span className="w-1/5 border-b  lg:w-1/4"></span>
             </div>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mt-4">
                 <label className="block mb-2 text-sm font-medium text-gray-600 ">
                   Name
@@ -41,7 +70,11 @@ const SignUp = () => {
                 <input
                   className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg   focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                   type="text"
+                  {...register("name", { required: true })}
                 />
+                {errors.name && (
+                  <span className="text-red-500">Your name is required</span>
+                )}
               </div>
               <div className="mt-4">
                 <label className="block mb-2 text-sm font-medium text-gray-600 ">
@@ -50,10 +83,14 @@ const SignUp = () => {
                 <input
                   className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg   focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                   type="email"
+                  {...register("email", { required: true })}
                 />
+                {errors.email && (
+                  <span className="text-red-500">Your email is required</span>
+                )}
               </div>
 
-              <div className="mt-4">
+              <div className="mt-4 relative">
                 <div className="flex justify-between">
                   <label className="block mb-2 text-sm font-medium text-gray-600 ">
                     Password
@@ -62,8 +99,36 @@ const SignUp = () => {
 
                 <input
                   className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg  focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
-                  type="password"
+                  type={showPass ? "text" : "password"}
+                  {...register("password", {
+                    required: true,
+                    minLength: 6,
+                    maxLength: 20,
+                    pattern: /^(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{6,}$/,
+                  })}
                 />
+                {errors.password?.type === "minLength" && (
+                  <span className="text-red-400">
+                    Password must have at least one uppercase one lower case and
+                    a special letter
+                  </span>
+                )}
+                {errors.password?.type === "pattern" && (
+                  <span className="text-red-400">
+                    Password must be at least 6 characters
+                  </span>
+                )}
+                {errors.password?.type === "maxLength" && (
+                  <span className="text-red-400">
+                    Password must be under 20 characters
+                  </span>
+                )}
+                <p
+                  onClick={() => setShowPass(!showPass)}
+                  className="absolute inset-y-0 end-0 grid place-content-center px-4  top-5 hover:cursor-pointer"
+                >
+                  {showPass ? <FaEye /> : <IoMdEyeOff />}
+                </p>
               </div>
 
               <div className="mt-6">
