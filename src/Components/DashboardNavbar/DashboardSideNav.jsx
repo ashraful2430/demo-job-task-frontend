@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
 
-const SideNav = () => {
+const DashboardSideNav = () => {
   return (
     <>
-      <ul className="menu p-4 w-80 min-h-full bg-base-200 z-50">
-        <div className="flex flex-col gap-3 text-center">
+      <ul className="menu p-4 w-52 min-h-full bg-base-200 z-50 text-center">
+        <div className="flex flex-col gap-3">
           <NavLink
             to={"/"}
             className={({ isActive }) =>
@@ -14,12 +14,20 @@ const SideNav = () => {
             Home
           </NavLink>
           <NavLink
-            to={"/tasks"}
+            to={"/add-task"}
             className={({ isActive }) =>
               isActive ? " bg-none text-[#66b888] font-bold" : ""
             }
           >
-            My Tasks
+            Add Task
+          </NavLink>
+          <NavLink
+            to={"/to-do"}
+            className={({ isActive }) =>
+              isActive ? " bg-none text-[#66b888] font-bold" : ""
+            }
+          >
+            To Do
           </NavLink>
         </div>
       </ul>
@@ -27,4 +35,4 @@ const SideNav = () => {
   );
 };
 
-export default SideNav;
+export default DashboardSideNav;

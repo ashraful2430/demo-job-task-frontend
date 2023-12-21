@@ -95,7 +95,7 @@ const NavBarLink = () => {
                       </button>
                     </li>
                     <li className="mx-auto">
-                      <Link>Dashboard</Link>
+                      <Link to={"/dashboard/profile"}>Dashboard</Link>
                     </li>
                   </ul>
                 </div>
