@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import Container from "../../Shared/Container";
+import logo from "../../assets/logo.png";
 
 const DashboardNavLink = () => {
   return (
@@ -27,7 +28,9 @@ const DashboardNavLink = () => {
               </svg>
             </label>
           </div>
-          <div className="flex-1 px-2 mx-2">Navbar Title</div>
+          <div className="flex-1 px-2 mx-2">
+            <img className="h-14" src={logo} alt="" />
+          </div>
           <div className="flex-none hidden lg:block">
             <div className="menu menu-horizontal ">
               {/* Navbar menu content here */}
