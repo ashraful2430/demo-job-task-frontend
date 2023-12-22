@@ -7,7 +7,7 @@ import useOngoing from "../../Hooks/useOngoing";
 import OngoingDetails from "./OngoinDetails";
 import useComplete from "../../Hooks/useComplete";
 import CompletedDetails from "./CompletedDetails";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 const Todo = () => {
   const [toDo, isLoading, refetch] = useLoadTodo();
@@ -36,24 +36,12 @@ const Todo = () => {
                     </h3>
                     <div>
                       {toDo.map((item, index) => (
-                        <Draggable
+                        <TodoDetails
+                          item={item}
                           key={item._id}
-                          draggableId={item._id}
+                          refetch={refetch}
                           index={index}
-                        >
-                          {(draggableProvided) => (
-                            <div
-                              ref={draggableProvided.innerRef}
-                              {...draggableProvided.draggableProps}
-                              {...draggableProvided.dragHandleProps}
-                            >
-                              <TodoDetails
-                                item={item}
-                                refetch={refetch}
-                              ></TodoDetails>
-                            </div>
-                          )}
-                        </Draggable>
+                        ></TodoDetails>
                       ))}
                     </div>
                   </div>
@@ -63,24 +51,12 @@ const Todo = () => {
                     </h3>
                     <div>
                       {ongoing.map((item, index) => (
-                        <Draggable
+                        <OngoingDetails
                           key={item._id}
-                          draggableId={item._id}
+                          item={item}
+                          refetch={refetch}
                           index={index}
-                        >
-                          {(draggableProvided) => (
-                            <div
-                              ref={draggableProvided.innerRef}
-                              {...draggableProvided.draggableProps}
-                              {...draggableProvided.dragHandleProps}
-                            >
-                              <OngoingDetails
-                                item={item}
-                                refetch={refetch}
-                              ></OngoingDetails>
-                            </div>
-                          )}
-                        </Draggable>
+                        ></OngoingDetails>
                       ))}
                     </div>
                   </div>
@@ -89,24 +65,12 @@ const Todo = () => {
                       Completed
                     </h3>
                     {completed.map((item, index) => (
-                      <Draggable
+                      <CompletedDetails
                         key={item._id}
-                        draggableId={item._id}
+                        item={item}
+                        refetch={refetch}
                         index={index}
-                      >
-                        {(draggableProvided) => (
-                          <div
-                            ref={draggableProvided.innerRef}
-                            {...draggableProvided.draggableProps}
-                            {...draggableProvided.dragHandleProps}
-                          >
-                            <CompletedDetails
-                              item={item}
-                              refetch={refetch}
-                            ></CompletedDetails>
-                          </div>
-                        )}
-                      </Draggable>
+                      ></CompletedDetails>
                     ))}
                   </div>
                 </div>
