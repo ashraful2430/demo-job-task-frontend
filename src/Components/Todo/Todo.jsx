@@ -28,52 +28,62 @@ const Todo = () => {
           <Droppable droppableId="tasks">
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
-                <h3 className="mt-5 text-3xl text-center">To-Do List</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-                  <div>
-                    <h3 className="text-xl font-medium text-center mb-5 underline">
-                      To-Do
+                {toDo.length === 0 ? (
+                  <>
+                    <h3 className="text-center flex justify-center items-center min-h-[50vh] text-3xl font-medium">
+                      You do not have any task added yet !
                     </h3>
-                    <div>
-                      {toDo.map((item, index) => (
-                        <TodoDetails
-                          item={item}
-                          key={item._id}
-                          refetch={refetch}
-                          index={index}
-                        ></TodoDetails>
-                      ))}
+                  </>
+                ) : (
+                  <>
+                    <h3 className="mt-5 text-3xl text-center">To-Do List</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+                      <div>
+                        <h3 className="text-xl font-medium text-center mb-5 underline">
+                          To-Do
+                        </h3>
+                        <div>
+                          {toDo.map((item, index) => (
+                            <TodoDetails
+                              item={item}
+                              key={item._id}
+                              refetch={refetch}
+                              index={index}
+                            ></TodoDetails>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-medium text-center mb-5 underline">
+                          Ongoing
+                        </h3>
+                        <div>
+                          {ongoing.map((item, index) => (
+                            <OngoingDetails
+                              key={item._id}
+                              item={item}
+                              refetch={refetch}
+                              index={index}
+                            ></OngoingDetails>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-medium text-center mb-5 underline">
+                          Completed
+                        </h3>
+                        {completed.map((item, index) => (
+                          <CompletedDetails
+                            key={item._id}
+                            item={item}
+                            refetch={refetch}
+                            index={index}
+                          ></CompletedDetails>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-medium text-center mb-5 underline">
-                      Ongoing
-                    </h3>
-                    <div>
-                      {ongoing.map((item, index) => (
-                        <OngoingDetails
-                          key={item._id}
-                          item={item}
-                          refetch={refetch}
-                          index={index}
-                        ></OngoingDetails>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-medium text-center mb-5 underline">
-                      Completed
-                    </h3>
-                    {completed.map((item, index) => (
-                      <CompletedDetails
-                        key={item._id}
-                        item={item}
-                        refetch={refetch}
-                        index={index}
-                      ></CompletedDetails>
-                    ))}
-                  </div>
-                </div>
+                  </>
+                )}
               </div>
             )}
           </Droppable>

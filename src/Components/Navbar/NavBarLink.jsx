@@ -60,6 +60,22 @@ const NavBarLink = () => {
                 Home
               </NavLink>
               <NavLink
+                to={"/about"}
+                className={({ isActive }) =>
+                  isActive ? " bg-none text-[#66b888] font-bold" : ""
+                }
+              >
+                About
+              </NavLink>
+              <NavLink
+                to={"/blog"}
+                className={({ isActive }) =>
+                  isActive ? " bg-none text-[#66b888] font-bold" : ""
+                }
+              >
+                Blog
+              </NavLink>
+              <NavLink
                 to={"/tasks"}
                 className={({ isActive }) =>
                   isActive ? " bg-none text-[#66b888] font-bold" : ""

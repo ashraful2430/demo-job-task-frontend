@@ -10,6 +10,8 @@ import AddTask from "../Components/AddTask/AddTask";
 import PrivateRoute from "./PrivateRoute";
 import Todo from "../Components/Todo/Todo";
 import MyTask from "../Components/MyTask/MyTask";
+import About from "../Pages/About/About";
+import Blog from "../Pages/Blog/Blog";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,14 @@ const router = createBrowserRouter([
             <MyTask></MyTask>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/about",
+        element: <About></About>,
+      },
+      {
+        path: "/blog",
+        element: <Blog></Blog>,
       },
     ],
   },

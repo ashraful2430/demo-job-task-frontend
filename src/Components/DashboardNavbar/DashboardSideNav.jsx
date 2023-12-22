@@ -14,7 +14,15 @@ const DashboardSideNav = () => {
             Home
           </NavLink>
           <NavLink
-            to={"/add-task"}
+            to={"/dashboard/profile"}
+            className={({ isActive }) =>
+              isActive ? " bg-none text-[#66b888] font-bold" : ""
+            }
+          >
+            Profile
+          </NavLink>
+          <NavLink
+            to={"/dashboard/add-task"}
             className={({ isActive }) =>
               isActive ? " bg-none text-[#66b888] font-bold" : ""
             }
@@ -22,7 +30,7 @@ const DashboardSideNav = () => {
             Add Task
           </NavLink>
           <NavLink
-            to={"/to-do"}
+            to={"/dashboard/to-do"}
             className={({ isActive }) =>
               isActive ? " bg-none text-[#66b888] font-bold" : ""
             }

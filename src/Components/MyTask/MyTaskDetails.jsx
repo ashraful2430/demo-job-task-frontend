@@ -4,7 +4,7 @@ const MyTaskDetails = ({ task }) => {
   const { title, description, status, deadLine, priority } = task;
   return (
     <div>
-      <div className="card w-96 bg-base-100 shadow-xl my-3">
+      <div className="card  bg-base-100 shadow-xl my-3 z-10">
         <div className="card-body">
           <h2 className="card-title">{title}</h2>
           <p>{description}</p>

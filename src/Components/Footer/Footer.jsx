@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import photo from "../../assets/logo.png";
 
 const Footer = () => {
@@ -16,40 +17,30 @@ const Footer = () => {
 
           <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
             <li>
-              <a
-                className="text-gray-700 transition hover:text-gray-700/75"
-                href="/"
-              >
-                {" "}
-                About{" "}
-              </a>
+              <Link to={"/about"}>
+                <div className="text-gray-700 transition hover:text-gray-700/75">
+                  {" "}
+                  About{" "}
+                </div>
+              </Link>
             </li>
 
             <li>
-              <a
-                className="text-gray-700 transition hover:text-gray-700/75"
-                href="/"
-              >
+              <a className="text-gray-700 transition hover:text-gray-700/75">
                 {" "}
                 History{" "}
               </a>
             </li>
 
             <li>
-              <a
-                className="text-gray-700 transition hover:text-gray-700/75"
-                href="/"
-              >
+              <a className="text-gray-700 transition hover:text-gray-700/75">
                 {" "}
                 Services{" "}
               </a>
             </li>
 
             <li>
-              <a
-                className="text-gray-700 transition hover:text-gray-700/75"
-                href="/"
-              >
+              <a className="text-gray-700 transition hover:text-gray-700/75">
                 {" "}
                 Blog{" "}
               </a>

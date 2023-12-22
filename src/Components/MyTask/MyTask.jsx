@@ -15,12 +15,24 @@ const MyTask = () => {
   return (
     <div>
       <Container>
-        <h3 className="text-3xl font-medium text-center my-10">All Tasks</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
-          {allTasks.map((task) => (
-            <MyTaskDetails key={task._id} task={task}></MyTaskDetails>
-          ))}
-        </div>
+        {allTasks.length === 0 ? (
+          <>
+            <h3 className="text-center flex justify-center items-center min-h-[50vh] text-3xl font-medium">
+              You do not have any task added yet !
+            </h3>
+          </>
+        ) : (
+          <>
+            <h3 className="text-3xl font-medium text-center my-10">
+              All Tasks
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-8 z-0">
+              {allTasks.map((task) => (
+                <MyTaskDetails key={task._id} task={task}></MyTaskDetails>
+              ))}
+            </div>
+          </>
+        )}
       </Container>
     </div>
   );
